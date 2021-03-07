@@ -1,0 +1,61 @@
+<!-- create modal -->
+
+<!-- Button trigger modal -->
+<button style="width: 100%;" type="button" class="create btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            create
+          </button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Enter your company's detail</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div id="modal-body" class="modal-body d-flex flex-column ">
+                <input type="text" class="company_id form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" value="<%=company._id%>" disabled>
+                <input type="text" class="name form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="name" required>
+                <input type="text" class="lastName form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="lastName" required>
+                <select class="gender form-select" aria-label="Default select example" name="gender">
+                        <option value="male">male</option>
+                        <option value="female">female</option>
+                        </select>
+                <select class="manager form-select" aria-label="Default select example" name="manager">
+                        <option value="true">true</option>
+                        <option value="false">false</option>
+                        </select>
+                <input type="number" class="socialId form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="socialId" required>
+                <input type="date" class="date form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="birthDate" required>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="close btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="save btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- edit/delete modal -->
+<button style="display: none;" type="button" class="E_D btn btn-primary" data-bs-toggle="modal" data-bs-target="#editleModal">
+    Edit/Delete
+  </button>
+<!-- Modal -->
+<div class="modal fade" id="editleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit/Delete your company's detail</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="editBody modal-body d-flex flex-column " style="text-align: left;">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="Eclose btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="Esave btn btn-primary">Save changes</button>
+                <button type="button" class="delete btn btn-danger">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>

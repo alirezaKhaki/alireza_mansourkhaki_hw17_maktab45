@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/1fb4402ed5.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/style.css">
+    <title>table</title>
+</head>
+
+<body>
+    <div class="container" style="padding: 50px;text-align: center;">
+        <h3 style="color: rgb(99, 97, 97);">click on table for update/delete</h3>
+        <h3 style="color: rgb(99, 97, 97);">Company name:
+            <%=company.name%>
+        </h3>
+        <table class="table table-dark table-hover table-striped">
+            <thead>
+                <tr class="tableHeadRow">
+                    <th scope="col">id</th>
+                    <th scope="col">name</th>
+                    <th scope="col">lastName</th>
+                    <th scope="col">gender</th>
+                    <th scope="col">manager</th>
+                    <th scope="col">socialId</th>
+                    <th scope="col">birthDate</th>
+                    <th scope="col">company</th>
+                </tr>
+            </thead>
+            <tbody class="tbody">
+                <% for(var i=0; i < products.length; i++) { %>
+                    <tr class="tr">
+
+
+                        <td class="id">
+                            <%= products[i]._id %>
+                        </td>
+                        <td>
+                            <%= products[i].name %>
+                        </td>
+                        <td class="id">
+                            <%= products[i].lastName %>
+                        </td>
+                        <td class="id">
+                            <% if(products[i].gender==="male"){ %>
+
+                                <i class="fas fa-male"></i>
+
+
+                                <%} else{ %>
+                                    <i class="fas fa-female"></i>
+                                    <% } %>
+
+                        </td>
+                        <td class="id">
+                            <% if(products[i].manager===true){ %>
+                                <i class="fas fa-check"></i>
+                                <%} else{ %>
+                                    <i class="fas fa-window-close"></i>
+                                    <% } %>
+                        </td>
+                        <td class="id">
+                            <%= products[i].socialId %>
+                        </td>
+                        <td class="id">
+                            <%= products[i].birthDate.toLocaleDateString() %>
+                        </td>
+                        <td class="id">
+                            <%= products[i].company %>
+                        </td>
+                    </tr>
+                    <% } %>
+            </tbody>
+        </table>
+        <%- include('./partials/employeesModals.ejs') %>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="/info.js"></script>
+</body>
+
+</html>

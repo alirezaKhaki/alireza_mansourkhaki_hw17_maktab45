@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/style.css">
+    <title>table</title>
+</head>
+
+<body>
+
+
+
+    <div class="container" style="padding: 50px;text-align: center;">
+
+        <h3 style="color: rgb(99, 97, 97); ">click on table for update/delete</h3>
+        <h4 style="color: rgb(99, 97, 97); ">click on company name to see the employees</h4>
+        <div class="table ">
+            <table class="table table-dark table-hover table-striped ">
+                <thead>
+                    <tr class="tableHeadRow ">
+                        <th scope="col ">id</th>
+                        <th scope="col ">name</th>
+                        <th scope="col ">creatId</th>
+                        <th scope="col ">number</th>
+                        <th scope="col ">city</th>
+                        <th scope="col ">province</th>
+                        <th scope="col ">dateOfCreation</th>
+                    </tr>
+                </thead>
+                <tbody class="tbody ">
+                    <% for(var i=0; i<(companies).length; i++) {%>
+                        <tr class="tr ">
+
+                            <td class="id ">
+                                <%=companies[i]._id%>
+                            </td>
+                            <td class="id ">
+                                <a href="<%=companies[i]._id%>">
+                                    <%= companies[i].name%>
+                                </a>
+
+                            </td>
+                            <td class="id">
+                                <%= companies[i].creatId %>
+                            </td>
+                            <td>
+                                <%= companies[i].number %>
+                            </td>
+                            <td class="id">
+                                <%= companies[i].city %>
+                            </td>
+                            <td class="id">
+                                <%= companies[i].province %>
+                            </td>
+                            <td class="id">
+                                <%= companies[i].dateOfCreation.toLocaleDateString() %>
+                            </td>
+
+                        </tr>
+                        <% } %>
+                </tbody>
+            </table>
+
+
+        </div>
+        <%- include('./partials/comapniesModals.ejs') %>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="/ejs.js"></script>
+</body>
+
+</html>

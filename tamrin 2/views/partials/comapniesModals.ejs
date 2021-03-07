@@ -1,0 +1,77 @@
+<!-- create modal -->
+
+<!-- Button trigger modal -->
+<div style="display: flex;flex-direction: row;justify-content: space-between;">
+    <button style="width: 45%;" type="button" class="searchByDate btn btn-primary" data-bs-toggle="modal" data-bs-target="#searchleModal">
+                search by date
+              </button>
+    <button style="width: 45%;" type="button" class="create btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                create
+              </button>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Enter your company's detail</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div id="modal-body" class="modal-body d-flex flex-column ">
+                <input type="text" class="name form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="name" required>
+                <input type="number" class="createId form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="createId" required>
+                <input type="number" class="number form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="number" required>
+                <input type="text" class="city form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="city" required>
+                <input type="text" class="province form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="province" required>
+                <input type="date" class="date form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="dateOfCreation" required>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="close btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="save btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- edit/delete modal -->
+<button style="display: none;" type="button" class="E_D btn btn-primary" data-bs-toggle="modal" data-bs-target="#editleModal">
+                Edit/Delete
+              </button>
+<!-- Modal -->
+<div class="modal fade" id="editleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit/Delete your company's detail</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="editBody modal-body d-flex flex-column ">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="Eclose btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="Esave btn btn-primary">Save changes</button>
+                <button type="button" class="delete btn btn-danger">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- search modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="searchleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="searchBody modal-body d-flex flex-column ">
+                <input type="date" class="form-control" name="" id="from_date" placeholder="date">
+                <input type="date" class="form-control" name="" id="to_date" placeholder="date">
+                <button type="button" class="search btn btn-primary" style="margin-top: 5px;">search</button>
+            </div>
+
+        </div>
+    </div>
+</div>
