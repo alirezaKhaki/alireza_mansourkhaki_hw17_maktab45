@@ -59,22 +59,27 @@ $(document).ready(function() {
 
             }
             let newUser = new person(name, lastName, gender, manager, socialId, date, company_id)
-            console.log(newUser);
+
             $.ajax({
                 url: `/employees/${employee._id}`,
                 type: 'POST',
                 data: newUser,
                 success: function(data) {
-                    $(function() {
-                        $('.editBody').html(`<h1 >successfully changed</h1>`)
-                        $('.modal-footer').html(``)
-                        $('.modal-header').html(``)
-                        $(".close").click()
-                        setTimeout(() => {
+                    if (data.msg === "each company has only one manager") {
+                        alert(data.msg)
+                    } else {
+                        $(function() {
+                            $('.editBody').html(`<h1 >successfully changed</h1>`)
+                            $('.modal-footer').html(``)
+                            $('.modal-header').html(``)
+                            $(".close").click()
+                            setTimeout(() => {
 
-                            window.location = `/company/${company_id}`
-                        }, 2000)
-                    });
+                                window.location = `/company/${company_id}`
+                            }, 2000)
+                        });
+                    }
+
 
                 },
                 error: function(err) {
@@ -139,23 +144,27 @@ $(document).ready(function() {
 
         }
         let newUser = new person(name, lastName, gender, manager, socialId, date, company_id)
-
+        console.log(newUser);
         $.ajax({
             url: '/employees/',
             type: 'PUT',
             data: newUser,
             success: function(data) {
-                $(function() {
-                    $(".close").click()
-                    $('.editBody').html(`<h1 >successfully added</h1>`)
-                    $('.modal-footer').html(``)
-                    $('.modal-header').html(``)
-                    $(".E_D").click()
-                    setTimeout(() => {
-                        window.location = `/company/${company_id}`
-                    }, 2000)
-                });
+                if (data.msg === "each company has only one manager") {
 
+                    alert(data.msg)
+                } else {
+                    $(function() {
+                        $(".close").click()
+                        $('.editBody').html(`<h1 >successfully added</h1>`)
+                        $('.modal-footer').html(``)
+                        $('.modal-header').html(``)
+                        $(".E_D").click()
+                        setTimeout(() => {
+                            window.location = `/company/${company_id}`
+                        }, 2000)
+                    });
+                }
             },
             error: function(err) {
                 alert(err.responseText);

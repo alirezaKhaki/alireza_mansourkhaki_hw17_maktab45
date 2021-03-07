@@ -132,11 +132,11 @@ $(document).ready(function() {
                 this.dateOfCreation = date;
             }
             let company = new person(name, id, city, province, number, date)
-
+            console.log(company);
             $.ajax({
                 url: '/company/',
                 type: 'PUT',
-                data: company,
+                data: (company),
                 success: function(data) {
                     $(function() {
                         $(".close").click()
