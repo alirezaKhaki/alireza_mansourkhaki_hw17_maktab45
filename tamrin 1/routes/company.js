@@ -18,6 +18,17 @@ router.get('/all', (req, res) => {
     });
 });
 
+router.get('/getallmanagers', (req, res) => {
+    Company.findOne({}, { name: 1, _id: 0 }, (err, company) => {
+        const companyName = company
+        if (err) return res.status(500).json({ msg: "Server Error :)", err: err.message });
+        Product.find({ manager: true }, { name: 1, lastName: 1, manager: 1, _id: 0 }).populate('company', 'name').exec((err, products) => {
+            if (err) return res.status(500).json({ msg: "Server Error :)", err: err.message })
+            res.json({ products })
+
+        })
+    })
+});
 
 router.get('/getmanager/:id', (req, res) => {
     Company.findOne({ _id: req.params.id }, (err, company) => {

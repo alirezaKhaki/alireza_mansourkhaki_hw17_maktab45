@@ -22,7 +22,7 @@ router.get('/20-30', (req, res) => {
     const yearNow = date.getFullYear();
     const thirty = yearNow - 30;
     const twenty = yearNow - 20;
-    employees.find({ "birthDate.year": { $gt: `${thirty}`, $lt: `${twenty}` } }, { _id: false }, (err, employee) => {
+    employees.find({ birthDate: { $gt: `${thirty}`, $lt: `${twenty}` } }, { _id: false }, (err, employee) => {
         if (err) return res.status(500).json({ msg: "Server Error :)", err: err.message });
         res.json(employee);
     });
