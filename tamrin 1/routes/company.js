@@ -19,6 +19,17 @@ router.get('/all', (req, res) => {
 });
 
 
+router.get('/getmanager/:id', (req, res) => {
+    console.log(true);
+    Company.findOne({ _id: req.params.id }, (err, company) => {
+        if (err) return res.status(500).json({ msg: "Server Error :)", err: err.message });
+        Product.find({ company: company._id, manager: true }, { name: 1, lastName: 1, manager: 1, _id: 0 }, (err, products) => {
+            if (err) return res.status(500).json({ msg: "Server Error :)", err: err.message });
+            res.json({ products })
+
+        })
+    })
+});
 
 
 router.get('/:id', (req, res) => {
