@@ -44,7 +44,8 @@ router.get('/:id', (req, res) => {
 });
 
 router.put('/', (req, res) => {
-
+    console.log(true);
+    console.log(req.body);
     if (!req.body.name || !req.body.company) {
         return res.status(400).json({ msg: "Bad Request :)" })
     };
