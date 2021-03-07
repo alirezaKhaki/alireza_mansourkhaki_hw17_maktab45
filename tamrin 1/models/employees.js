@@ -31,7 +31,7 @@ const employeesSchema = new Schema({
     },
     manager: {
         type: Boolean,
-        required: true,
+        required: false,
     },
     CreatedAt: {
         type: Date,

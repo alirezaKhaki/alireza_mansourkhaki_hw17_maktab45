@@ -48,27 +48,54 @@ router.put('/', (req, res) => {
     if (!req.body.name || !req.body.company) {
         return res.status(400).json({ msg: "Bad Request :)" })
     };
-
-    company.findById(req.body.company, (err, company) => {
-        if (err) return res.status(500).json({ msg: "Server Error :)", err: err.message });
-        if (!company) return res.status(404).json({ msg: "Not Found :)" })
-
-        const newemployee = new employees({
-            name: req.body.name,
-            lastName: req.body.lastName,
-            gender: req.body.gender,
-            manager: req.body.manager,
-            socialId: req.body.socialId,
-            birthDate: req.body.birthDate,
-            company: company._id
-        });
-
-        newemployee.save((err, employee) => {
+    if (req.body.manager === true) {
+        employees.find({ manager: true, company: req.body.company }, (err, employee) => {
             if (err) return res.status(500).json({ msg: "Server Error :)", err: err.message });
-            res.json(employee)
-        })
-    });
+            if (employee.length > 0) {
+                return res.json({ msg: "each company has only one manager" })
+            } else {
+                company.findById(req.body.company, (err, company) => {
+                    if (err) return res.status(500).json({ msg: "Server Error :)", err: err.message });
+                    if (!company) return res.status(404).json({ msg: "Not Found :)" })
 
+                    const newemployee = new employees({
+                        name: req.body.name,
+                        lastName: req.body.lastName,
+                        gender: req.body.gender,
+                        manager: req.body.manager,
+                        socialId: req.body.socialId,
+                        birthDate: req.body.birthDate,
+                        company: company._id
+                    });
+
+                    newemployee.save((err, employee) => {
+                        if (err) return res.status(500).json({ msg: "Server Error :)", err: err.message });
+                        res.json(employee)
+                    })
+                });
+            }
+        })
+    } else {
+        company.findById(req.body.company, (err, company) => {
+            if (err) return res.status(500).json({ msg: "Server Error :)", err: err.message });
+            if (!company) return res.status(404).json({ msg: "Not Found :)" })
+
+            const newemployee = new employees({
+                name: req.body.name,
+                lastName: req.body.lastName,
+                gender: req.body.gender,
+                manager: req.body.manager,
+                socialId: req.body.socialId,
+                birthDate: req.body.birthDate,
+                company: company._id
+            });
+
+            newemployee.save((err, employee) => {
+                if (err) return res.status(500).json({ msg: "Server Error :)", err: err.message });
+                res.json(employee)
+            })
+        });
+    }
 
 });
 
