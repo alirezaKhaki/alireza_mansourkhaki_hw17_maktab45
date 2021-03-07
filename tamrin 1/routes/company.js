@@ -20,7 +20,6 @@ router.get('/all', (req, res) => {
 
 
 router.get('/getmanager/:id', (req, res) => {
-    console.log(true);
     Company.findOne({ _id: req.params.id }, (err, company) => {
         if (err) return res.status(500).json({ msg: "Server Error :)", err: err.message });
         Product.find({ company: company._id, manager: true }, { name: 1, lastName: 1, manager: 1, _id: 0 }, (err, products) => {
@@ -29,6 +28,20 @@ router.get('/getmanager/:id', (req, res) => {
 
         })
     })
+});
+
+router.get('/age/:id', (req, res) => {
+    const inputYear = Number(req.params.id);
+    const year = new Date();
+    const yearNow = year.getFullYear();
+    const yearToCount = yearNow - inputYear;
+    Company.find({
+            dateOfCreation: { $gt: `${yearToCount }`, $lt: `${yearNow}` }
+        },
+        (err, company) => {
+            if (err) return res.status(500).json({ msg: "Server Error :)", err: err.message });
+            res.json(company)
+        })
 });
 
 
@@ -88,6 +101,16 @@ router.get('/age/:id', (req, res, next) => {
             res.render('date', { companies })
 
         });
+});
+
+
+router.post('/changecity', (req, res) => {
+    const city = req.body.city
+    Company.updateMany(({}, { $set: { city: `${city}`, province: `${city}` } }), (err, company) => {
+        if (err) return res.status(500).json({ msg: "Server Error :)", err: err.message });
+        res.json({ company, msg: "success" });
+    })
+
 });
 
 
