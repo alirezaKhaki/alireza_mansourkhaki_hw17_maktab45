@@ -66,7 +66,7 @@ router.put('/', (req, res) => {
 router.get('/age/:id', (req, res, next) => {
     let search = req.params.id
     search = JSON.parse('{"' + search.replace(/&/g, '","').replace(/=/g, '":"') + '"}', function(key, value) { return key === "" ? value : decodeURIComponent(value) })
-    console.log(search);
+
     if (search.to === '' || search.from === '') return res.redirect('/company/companiespage')
     Company.find({
             dateOfCreation: { $gt: search.from, $lt: search.to }
