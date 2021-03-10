@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Company = require('../models/company');
-const Product = require('../models/employees');
+const employee = require('../models/employees');
 const path = require('path');
 
 router.get('/companiesPage', (req, res) => {
@@ -18,13 +18,13 @@ router.get('/all', (req, res) => {
     });
 });
 
+
 router.get('/getallmanagers', (req, res) => {
-    Company.findOne({}, { name: 1, _id: 0 }, (err, company) => {
-        const companyName = company
+    Company.find({}, (err, company) => {
         if (err) return res.status(500).json({ msg: "Server Error :)", err: err.message });
-        Product.find({ manager: true }, { name: 1, lastName: 1, manager: 1, _id: 0 }).populate('company', 'name').exec((err, products) => {
+        employee.find({ manager: true }, { name: 1, lastName: 1, manager: 1, _id: 0 }).populate('company', 'name').exec((err, employees) => {
             if (err) return res.status(500).json({ msg: "Server Error :)", err: err.message })
-            res.json({ products })
+            res.json({ employees })
 
         })
     })
@@ -34,9 +34,9 @@ router.get('/getallemployees/:id', (req, res) => {
     Company.findOne({ _id: req.params.id }, (err, company) => {
         const companyName = company
         if (err) return res.status(500).json({ msg: "Server Error :)", err: err.message });
-        Product.find({ company: req.params.id }, (err, products) => {
+        employee.find({ company: req.params.id }, (err, employees) => {
             if (err) return res.status(500).json({ msg: "Server Error :)", err: err.message })
-            res.json({ products })
+            res.json({ employees })
 
         })
     })
@@ -45,9 +45,9 @@ router.get('/getallemployees/:id', (req, res) => {
 router.get('/getmanager/:id', (req, res) => {
     Company.findOne({ _id: req.params.id }, (err, company) => {
         if (err) return res.status(500).json({ msg: "Server Error :)", err: err.message });
-        Product.find({ company: company._id, manager: true }, { name: 1, lastName: 1, manager: 1, _id: 0 }, (err, products) => {
+        employee.find({ company: company._id, manager: true }, { name: 1, lastName: 1, manager: 1, _id: 0 }, (err, employees) => {
             if (err) return res.status(500).json({ msg: "Server Error :)", err: err.message });
-            res.json({ products })
+            res.json({ employees })
 
         })
     })
@@ -71,9 +71,9 @@ router.get('/age/:id', (req, res) => {
 router.get('/:id', (req, res) => {
     Company.findOne({ _id: req.params.id }, (err, company) => {
         if (err) return res.status(500).json({ msg: "Server Error :)", err: err.message });
-        Product.find({ company: company._id }, (err, products) => {
+        employee.find({ company: company._id }, (err, employees) => {
             if (err) return res.status(500).json({ msg: "Server Error :)", err: err.message });
-            res.render('companyInfo', { company, products })
+            res.render('companyInfo', { company, employees })
 
         })
     })
@@ -154,7 +154,7 @@ router.delete('/:id', (req, res) => {
         company.deleteOne((err, company) => {
             if (err) return res.status(500).json({ msg: "Server Error :)", err: err.message });
 
-            Product.deleteMany({ company: company._id }, err => {
+            employee.deleteMany({ company: company._id }, err => {
                 if (err) return res.status(500).json({ msg: "Server Error :)", err: err.message });
 
                 Company.find({}, (err, companies) => {
