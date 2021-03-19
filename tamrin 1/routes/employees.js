@@ -100,10 +100,26 @@ router.put('/', (req, res) => {
 });
 
 router.post('/:id', (req, res) => {
-    employees.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true }, (err, employee) => {
-        if (err) return res.status(500).json({ msg: "Server Error :)", err: err.message });
-        res.json(employee);
-    })
+    if (req.body.manager == "true" || req.body.manager === true) {
+        employees.findOne({ _id: req.params.id }, (err, employee) => {
+            if (err) return res.status(500).json({ msg: "Server Error :)", err: err.message });
+            const emp = employee
+            employees.findOne({ company: emp.company, manager: true }, (err, emps) => {
+                if (err) return res.status(500).json({ msg: "Server Error :)", err: err.message });
+                if (emps) return res.status(400).send('each company has only one manager!')
+                if (employee.length > 0) return res.json({ msg: "each company has only one manager" })
+                employees.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true }, (err, employee) => {
+                    if (err) return res.status(500).json({ msg: "Server Error :)", err: err.message });
+                    res.json(employee);
+                })
+            })
+        })
+    } else {
+        employees.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true }, (err, employee) => {
+            if (err) return res.status(500).json({ msg: "Server Error :)", err: err.message });
+            res.json(employee);
+        })
+    }
 });
 
 router.delete('/:id', (req, res) => {
